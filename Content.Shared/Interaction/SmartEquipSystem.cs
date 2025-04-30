@@ -38,6 +38,7 @@ public sealed class SmartEquipSystem : EntitySystem
             .Bind(ContentKeyFunctions.SmartEquipPocket1, InputCmdHandler.FromDelegate(HandleSmartEquipPocket1, handle: false, outsidePrediction: false))
             .Bind(ContentKeyFunctions.SmartEquipPocket2, InputCmdHandler.FromDelegate(HandleSmartEquipPocket2, handle: false, outsidePrediction: false))
             .Bind(ContentKeyFunctions.SmartEquipSuitStorage, InputCmdHandler.FromDelegate(HandleSmartEquipSuitStorage, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipWallet, InputCmdHandler.FromDelegate(HandleSmartEquipWallet, handle: false, outsidePrediction: false)) // Frontier
             .Register<SmartEquipSystem>();
     }
 
@@ -73,6 +74,12 @@ public sealed class SmartEquipSystem : EntitySystem
         HandleSmartEquip(session, "suitstorage");
     }
 
+    // Frontier: smart-equip to wallet
+    private void HandleSmartEquipWallet(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "wallet");
+    }
+    // End Frontier: smart-equip to wallet
     private void HandleSmartEquip(ICommonSession? session, string equipmentSlot)
     {
         if (session is not { } playerSession)
