@@ -61,6 +61,7 @@ public sealed partial class JobNetSystem : EntitySystem
         if(station == null || args.ID == 0)
         {
             component.WorkingFor = 0;
+            UpdateUserInterface(args.Actor, uid, component);
             return;
         }
 

@@ -32,6 +32,7 @@ namespace Content.Client.GridControl.UI
             _window = this.CreateWindow<GridConfigWindow>();
             _window.PrivilegedIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(PrivilegedIdCardSlotId));
             _window.BUI = this;
+            _window.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
         }
 
 
