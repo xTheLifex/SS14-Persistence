@@ -9,6 +9,7 @@ using Content.Shared.Preferences;
 using JetBrains.Annotations;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
+using Robust.Shared.CPUJob.JobQueues;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -20,12 +21,57 @@ namespace Content.Server.GameTicking
     public sealed partial class GameTicker
     {
         [Dependency] private readonly IPlayerManager _playerManager = default!;
-
         private void InitializePlayer()
         {
             _playerManager.PlayerStatusChanged += PlayerStatusChanged;
         }
 
+        public bool TryRejoin(ICommonSession session)
+        {
+            EntityUid? mindId = null;
+            MindComponent? mind = null;
+            EntityUid? body = null;
+            if (!_mind.TryGetMind(session.UserId, out mindId, out mind)) return false;
+            _pvsOverride.AddSessionOverride(mindId.Value, session);
+            string charactername = "";
+            if (mind != null)
+            {
+                if(mind.CharacterName != null)
+                     charactername = mind.CharacterName;
+                if (mind.OwnedEntity != null && mind.OwnedEntity != EntityUid.Invalid) body = mind.OwnedEntity;
+
+
+                else if (mind.CurrentEntity != null && mind.CurrentEntity != EntityUid.Invalid) body = mind.CurrentEntity;
+
+                else mindId = null;
+            }
+            if (session.GetMind() != mindId && body != null && body != EntityUid.Invalid)
+            {
+                PlayerJoinGame(session, true);
+                var station = EntityUid.Invalid;
+                //   _mind.SetUserId((EntityUid)mindId!, session.UserId, mind);
+                _mind.WipeMind(body);
+                var newMind = _mind.CreateMind(session.UserId, mind!.CharacterName);
+                _mind.SetUserId(newMind, session.UserId);
+                _mind.TransferTo(newMind, body);
+                _playerManager.SetAttachedEntity(session, body, true);
+                // We raise this event directed to the mob, but also broadcast it so game rules can do something now.
+                PlayersJoinedRoundNormally++;
+                HumanoidCharacterProfile? character = GetPlayerProfile(session);
+                if (character == null) character = new HumanoidCharacterProfile();
+                var aev = new PlayerSpawnCompleteEvent(body.Value,
+                    session,
+                    "Passenger",
+                    true,
+                    false,
+                    PlayersJoinedRoundNormally,
+                    station,
+                    character);
+                RaiseLocalEvent(body.Value, aev, true);
+                return true;
+            }
+            return false;
+        }
         private async void PlayerStatusChanged(object? sender, SessionStatusEventArgs args)
         {
             EntityUid? mindId = null;

@@ -5,6 +5,8 @@ namespace Content.Shared.CCVar;
 
 public sealed partial class CCVars
 {
+    public static readonly CVarDef<int>
+        AutoSaveInterval = CVarDef.Create("game.autosaveinterval", 60, CVar.ARCHIVE);
     /// <summary>
     ///     Disables most functionality in the GameTicker.
     /// </summary>
