@@ -11,19 +11,50 @@ public sealed partial class CargoPalletMenu : FancyWindow
 {
     public Action? SellRequested;
     public Action? AppraiseRequested;
+    public Action? ChangeMoneyMode;
 
     public CargoPalletMenu()
     {
         RobustXamlLoader.Load(this);
         SellButton.OnPressed += OnSellPressed;
         AppraiseButton.OnPressed += OnAppraisePressed;
+        PaymentType.OnPressed += OnChangeMoneyMode;
     }
 
-    public void SetAppraisal(int amount)
+    public void SetAppraisal(int amount, int tax, bool moneyMode)
     {
-        AppraisalLabel.Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", amount.ToString()));
+        if (moneyMode)
+        {
+            float taxmult = (float)tax / 100f;
+            var taxpaid = (float)amount * taxmult;
+            amount -= (int)Math.Round(taxpaid);
+            TaxPaidLabel.Text = $"${(int)Math.Round(taxpaid)}";
+            TaxLabel.Text = $"{tax}%";
+            TaxContainer.Visible = true;
+            TaxPaidContainer.Visible = true;
+        }
+        else
+        {
+            TaxContainer.Visible = false;
+            TaxPaidContainer.Visible = false;
+        }
+
+            AppraisalLabel.Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", amount.ToString()));
+        
     }
 
+    public void SetMoneyMode(bool CashEnabled)
+    {
+        if(CashEnabled)
+        {
+            PaymentType.Text = "Cash (Spesos)";
+        }
+        else
+        {
+            PaymentType.Text = "Direct to Station";
+        }
+        
+    }
     public void SetCount(int count)
     {
         CountLabel.Text = count.ToString();
@@ -42,5 +73,10 @@ public sealed partial class CargoPalletMenu : FancyWindow
     private void OnAppraisePressed(BaseButton.ButtonEventArgs obj)
     {
         AppraiseRequested?.Invoke();
+    }
+
+    private void OnChangeMoneyMode(BaseButton.ButtonEventArgs obj)
+    {
+        ChangeMoneyMode?.Invoke();
     }
 }

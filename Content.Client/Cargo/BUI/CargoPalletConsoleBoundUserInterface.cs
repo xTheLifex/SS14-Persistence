@@ -22,6 +22,7 @@ public sealed class CargoPalletConsoleBoundUserInterface : BoundUserInterface
         _menu = this.CreateWindow<CargoPalletMenu>();
         _menu.AppraiseRequested += OnAppraisal;
         _menu.SellRequested += OnSell;
+        _menu.ChangeMoneyMode += OnChangeMoneyMode;
     }
 
     private void OnAppraisal()
@@ -34,6 +35,11 @@ public sealed class CargoPalletConsoleBoundUserInterface : BoundUserInterface
         SendMessage(new CargoPalletSellMessage());
     }
 
+    private void OnChangeMoneyMode()
+    {
+        SendMessage(new CargoPalletChangeMoneyMode());
+    }
+
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
@@ -42,7 +48,8 @@ public sealed class CargoPalletConsoleBoundUserInterface : BoundUserInterface
             return;
 
         _menu?.SetEnabled(palletState.Enabled);
-        _menu?.SetAppraisal(palletState.Appraisal);
+        _menu?.SetAppraisal(palletState.Appraisal, palletState.Tax, palletState.CashMode);
         _menu?.SetCount(palletState.Count);
+        _menu?.SetMoneyMode(palletState.CashMode);
     }
 }

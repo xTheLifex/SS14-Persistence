@@ -69,6 +69,7 @@ namespace Content.Client.Cargo.BUI
             _orderMenu = new CargoConsoleOrderMenu();
 
             _menu.OnClose += Close;
+            _menu.AccountTypeMode.OnPressed += ChangeAccountType;
 
             _menu.OnItemSelected += (args) =>
             {
@@ -92,6 +93,7 @@ namespace Content.Client.Cargo.BUI
             };
             _menu.OnOrderApproved += ApproveOrder;
             _menu.OnOrderCanceled += RemoveOrder;
+            
             _orderMenu.SubmitButton.OnPressed += (_) =>
             {
                 if (AddOrder())
@@ -131,7 +133,7 @@ namespace Content.Client.Cargo.BUI
             if (state is not CargoConsoleInterfaceState cState || !EntMan.TryGetComponent<CargoOrderConsoleComponent>(Owner, out var orderConsole))
                 return;
             var station = EntMan.GetEntity(cState.Station);
-
+            
             OrderCapacity = cState.Capacity;
             OrderCount = cState.Count;
             BankBalance = _cargoSystem.GetBalanceFromAccount(station, orderConsole.Account);
@@ -140,10 +142,9 @@ namespace Content.Client.Cargo.BUI
 
             if (_menu == null)
                 return;
-
             _menu.ProductCatalogue = cState.Products;
 
-            _menu?.UpdateStation(station);
+            _menu?.UpdateStation(station, cState.PersonalMode, cState.Tax);
             Populate(cState.Orders);
         }
 
@@ -175,6 +176,11 @@ namespace Content.Client.Cargo.BUI
             return true;
         }
 
+        private void ChangeAccountType(ButtonEventArgs args)
+        {
+
+            SendMessage(new CargoConsoleChangeAccountType());
+        }
         private void RemoveOrder(ButtonEventArgs args)
         {
             if (args.Button.Parent?.Parent is not CargoOrderRow row || row.Order == null)

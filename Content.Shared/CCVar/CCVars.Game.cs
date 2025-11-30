@@ -5,6 +5,8 @@ namespace Content.Shared.CCVar;
 
 public sealed partial class CCVars
 {
+    public static readonly CVarDef<int>
+        AutoSaveInterval = CVarDef.Create("game.autosaveinterval", 60, CVar.ARCHIVE);
     /// <summary>
     ///     Disables most functionality in the GameTicker.
     /// </summary>
@@ -409,4 +411,7 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool> GameHostnameInTitlebar =
         CVarDef.Create("game.hostname_in_titlebar", true, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> ForensicsMaxEntries =
+        CVarDef.Create("game.forensics_max_entries", 5, CVar.SERVER);
 }

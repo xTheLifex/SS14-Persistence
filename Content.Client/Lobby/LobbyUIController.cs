@@ -209,17 +209,24 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         var selected = _preferencesManager.Preferences?.SelectedCharacterIndex;
 
-        if (selected == null)
+        if (selected == null || _playerManager.LocalSession == null)
             return;
 
-        _preferencesManager.UpdateCharacter(EditedProfile, EditedSlot.Value);
-        ReloadCharacterSetup();
-        _consoleHost.ExecuteCommand($"joingamepersistent false");
+        _preferencesManager.FinalizeCharacter(EditedProfile, EditedSlot.Value);
+        CloseProfileEditor();
+     //   _consoleHost.ExecuteCommand($"joingamepersistent false");
     }
 
     private void JoinProfile()
     {
-        _consoleHost.ExecuteCommand($"joingamepersistent true");
+        var selected = _preferencesManager.Preferences?.SelectedCharacterIndex;
+
+        if (selected == null || _playerManager.LocalSession == null)
+            return;
+
+        _preferencesManager.JoinAsCharacter(selected.Value);
+        CloseProfileEditor();
+        //   _consoleHost.ExecuteCommand($"joingamepersistent false");
     }
 
 

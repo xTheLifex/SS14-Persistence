@@ -37,3 +37,23 @@
   cost: 2500
   category: cargoproduct-category-name-cargo
   group: market
+
+- type: cargoProduct
+  id: ComputerWithdrawBankATMFlatpack
+  icon:
+    sprite: _NF/Structures/Machines/atm/atm.rsi
+    state: icon
+  product: ComputerWithdrawBankATMFlatpack
+  cost: 5000
+  category: cargoproduct-category-name-cargo
+  group: market
+
+- type: cargoProduct
+  id: CargoRequestCircuitboard
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: icon
+  product: CargoRequestComputerCircuitboard
+  cost: 2500
+  category: cargoproduct-category-name-cargo
+  group: market

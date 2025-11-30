@@ -17,6 +17,8 @@ namespace Content.Shared.Cargo.Components;
 [Access(typeof(SharedCargoSystem))]
 public sealed partial class CargoOrderConsoleComponent : Component
 {
+    [DataField]
+    public bool PersonalAccountMode = false;
     /// <summary>
     /// The account that this console pulls from for ordering.
     /// </summary>
@@ -45,7 +47,7 @@ public sealed partial class CargoOrderConsoleComponent : Component
     /// The maximum percent of total funds that can be transferred or withdrawn in one action.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float BaseTransferLimit = 0.20f;
+    public float BaseTransferLimit = 0.05f;
 
     /// <summary>
     /// The time at which account actions can be performed again.
