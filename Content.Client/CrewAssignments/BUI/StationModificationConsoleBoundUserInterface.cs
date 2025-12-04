@@ -74,7 +74,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         _menu.ReassignmentBtn.OnPressed += ToggleAssign;
         _menu.ITaxConfirm.OnPressed += ChangeITax;
         _menu.ETaxConfirm.OnPressed += ChangeETax;
-
+        _menu.STaxConfirm.OnPressed += ChangeSTax;
         _menu.OpenCentered();
     }
 
@@ -100,6 +100,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         {
             _menu.ETaxSpinBox.Value = cState.ExportTax;
             _menu.ITaxSpinBox.Value = cState.ImportTax;
+            _menu.STaxSpinBox.Value = cState.SalesTax;
         }
 
     }
@@ -214,7 +215,13 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
 
         SendMessage(new StationModificationChangeExportTax(clevel));
     }
+    private void ChangeSTax(ButtonEventArgs args)
+    {
+        if (_menu == null) return;
+        var clevel = _menu.STaxSpinBox.Value;
 
+        SendMessage(new StationModificationChangeSalesTax(clevel));
+    }
     private void ChangeWage(ButtonEventArgs args)
     {
         if (_menu == null) return;

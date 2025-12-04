@@ -25,6 +25,7 @@
   </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
+  
   <ItemGroup>
     <Compile Update="CrewAssignments\UI\JobNetMenu.xaml.cs">
       <DependentUpon>JobNetMenu.xaml</DependentUpon>
@@ -34,6 +35,12 @@
     </Compile>
     <Compile Update="GridControl\UISC\StationCreatorWindow.xaml.cs">
       <DependentUpon>StationCreatorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Invoices\UI\InvoicePrinterConsoleWindow.xaml.cs">
+      <DependentUpon>InvoicePrinterConsoleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Invoices\UI\InvoiceWindow.xaml.cs">
+      <DependentUpon>InvoiceWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -75,13 +75,16 @@ public sealed partial class PaperComponent : Component
     public enum PaperVisuals : byte
     {
         Status,
-        Stamp
+        Stamp,
+        Invoice
     }
 
     [Serializable, NetSerializable]
     public enum PaperStatus : byte
     {
         Blank,
-        Written
+        Written,
+        Unpaid,
+        Paid
     }
 }

@@ -39,6 +39,8 @@ public sealed partial class StationDataComponent : Component
     [DataField, AutoNetworkedField]
     public int ExportTax = 0;
 
+    [DataField, AutoNetworkedField]
+    public int SalesTax = 0;
 
     public bool IsOwner(string owner)
     {

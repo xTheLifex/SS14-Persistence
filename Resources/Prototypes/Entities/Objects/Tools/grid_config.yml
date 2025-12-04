@@ -91,3 +91,28 @@
     - type: ContainerContainer
       containers:
         StationCreator-privilegedId: !type:ContainerSlot
+
+
+- type: entity
+  parent: BaseItem
+  id: Invoice
+  name: digital invoice
+  description: A digital invoice which processes payments.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/bureaucracy.rsi
+      state: invoiceunpaid
+    - type: Item
+      size: Small
+    - type: Invoice
+    - type: UserInterface
+      interfaces:
+        enum.InvoiceUiKey.Key:
+          type: InvoiceBoundUserInterface
+    - type: ActivatableUI
+      key: enum.InvoiceUiKey.Key
+      requiresComplex: true
+      requireActiveHand: false
+      singleUser: true
+    - type: PaperVisuals
+    - type: Appearance
