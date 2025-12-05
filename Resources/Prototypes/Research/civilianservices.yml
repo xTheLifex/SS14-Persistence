@@ -83,6 +83,19 @@
   - BiofabricatorMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
 
+- type: technology
+  id: CorpseStorage
+  name: research-technology-corpse-storage
+  icon:
+    sprite: Structures/Storage/morgue.rsi
+    state: morgue_closed
+  discipline: CivilianServices
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - MorgueCircuitboard
+  - CrematoriumCircuitboard
+
 # Tier 2
 
 - type: technology
