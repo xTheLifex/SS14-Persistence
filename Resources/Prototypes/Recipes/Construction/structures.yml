@@ -1328,3 +1328,40 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  id: Morgue
+  graph: MorgueGraph
+  startNode: start
+  targetNode: morgue
+  category: construction-category-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: Crematorium
+  graph: CrematoriumGraph
+  startNode: start
+  targetNode: crematorium
+  category: construction-category-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: BarSignDefault
+  graph: BarSignGraph
+  startNode: start
+  targetNode: bar_sign
+  category: construction-category-furniture
+  description: A LED sign sure to catch the attention of any wayward spacers.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:WallmountCondition
