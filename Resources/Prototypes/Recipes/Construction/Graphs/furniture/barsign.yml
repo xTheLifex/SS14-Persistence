@@ -8,7 +8,7 @@
       steps:
       - material: Steel
         amount: 4
-        doafter: 2.0
+        doAfter: 2.0
 
   - node: glass
     entity: BarSignAssembly
