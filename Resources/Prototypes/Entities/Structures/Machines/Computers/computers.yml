@@ -624,7 +624,7 @@
       IdCardConsole-privilegedId: !type:ContainerSlot
       IdCardConsole-targetId: !type:ContainerSlot
   - type: AccessReader
-      access: []
+    access: []
 
 - type: entity
   parent: BaseComputerAiAccess
