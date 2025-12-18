@@ -80,8 +80,8 @@ public sealed partial class GridConfigWindow : DefaultWindow
         {
             targetName = state.TargetName; 
         }
-        GridTileCount.Text = state.GridTileCount.ToString();
-        MaxPersonalClaimTileCount.Text = state.MaxPersonalClaimTileCount.ToString();
+        GridTileCount.Text = $"{state.GridTileCount}";
+        MaxPersonalClaimTileCount.Text = $"{state.MaxPersonalClaimTileCount- state.CurrentTileCount} available tiles";
         if (state.PersonalMode)
         {
             ChangeModeBtn.Text = "Station";
@@ -120,9 +120,9 @@ public sealed partial class GridConfigWindow : DefaultWindow
         bool gridOwned = false;
         if(state.ErrorMessage == null)
         {
-            if(state.GridTileCount > state.MaxPersonalClaimTileCount)
+            if(state.GridTileCount+state.CurrentTileCount > state.MaxPersonalClaimTileCount)
             {
-                state.ErrorMessage = "This grid will exceed your tile capacity.";
+                state.ErrorMessage = "This grid will exceed the tile limit.";
             }
         }
         if (state.OwnerName != null)
