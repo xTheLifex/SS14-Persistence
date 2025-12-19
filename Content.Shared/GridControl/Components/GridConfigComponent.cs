@@ -36,6 +36,7 @@ public sealed partial class GridConfigComponent : Component
         public bool IsOwner = false;
         public bool IsAuth = false;
         public bool PersonalMode = false;
+        public bool IsControlled = false;
         public Dictionary<int, string>? PossibleStations = null;
         public string? TargetName = null;
         public string? OwnerName = null;
@@ -49,7 +50,7 @@ public sealed partial class GridConfigComponent : Component
 
         public string? ErrorMessage = null;
         public GridConfigBoundUserInterfaceState(
-            bool idpresent, bool isowner, bool isauth, bool personalmode,
+            bool idpresent, bool isowner, bool isauth, bool personalmode, bool isControlled,
             Dictionary<int,string>? possiblestations, string? targetname,
             string? ownername, string? gridname, string? idname, int? targetStation,
             int gridTileCount, int currentTileCount, int maxPersonalClaimTileCount, string? errorMessage
@@ -59,6 +60,7 @@ public sealed partial class GridConfigComponent : Component
             IsOwner = isowner;
             IsAuth = isauth;
             PersonalMode = personalmode;
+            IsControlled = isControlled;
             PossibleStations = possiblestations;
             TargetName = targetname;
             OwnerName = ownername;

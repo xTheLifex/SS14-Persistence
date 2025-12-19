@@ -18,6 +18,7 @@ using Content.Shared.GridControl.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
+using Content.Shared.Tools.Components;
 using JetBrains.Annotations;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -33,6 +34,7 @@ using System.Globalization;
 using System.Linq;
 using static Content.Shared.Access.Components.AccessOverriderComponent;
 using static Content.Shared.GridControl.Components.GridConfigComponent;
+using static Content.Shared.GridControl.Components.GridControlConsoleComponent;
 using static Content.Shared.GridControl.Components.StationCreatorComponent;
 using static Content.Shared.GridControl.Components.StationTaggerComponent;
 
@@ -41,6 +43,7 @@ namespace Content.Server.GridControl.Systems;
 [UsedImplicitly]
 public sealed class GridConfigSystem : SharedGridConfigSystem
 {
+    [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
@@ -98,6 +101,13 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
             subs.Event<StationCreatorFinish>(OnStationCreate);
         });
 
+        Subs.BuiEvents<GridControlConsoleComponent>(GridControlConsoleUiKey.Key, subs =>
+        {
+            subs.Event<BoundUIOpenedEvent>(UpdateUserInterface);
+            subs.Event<GridControlOn>(OnGridControlOn);
+            subs.Event<GridControlOff>(OnGridControlOff);
+        });
+
     }
 
     private void OnUnlink(EntityUid uid, StationTaggerComponent component, EntityEventArgs args)
@@ -122,8 +132,9 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
         if (station == null) return;
         var comp2 = EnsureComp<StationTrackerComponent>(component.TargetAccessReaderId);
         if (comp2 == null) return;
-
+        comp2.locked = false;
         _station.SetStation((component.TargetAccessReaderId, comp2), station);
+        comp2.locked = true;
         UpdateUserInterface(uid, component, args);
     }
     private void OnRemoved(EntityUid uid, GridConfigComponent component, EntityEventArgs args)
@@ -395,26 +406,24 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
     private void OnDisconnect(EntityUid uid, GridConfigComponent component, GridConfigDisconnect args)
     {
 
-        if (Validate(uid, component))
+        var grid = _transform.GetGrid(uid);
+        if (grid != null)
         {
-            var grid = _transform.GetGrid(uid);
-            if (grid != null)
+            if (IsGridControlled(grid.Value)) return;
+            var station = _station.GetOwningStation(grid.Value);
+            if(station != null)
             {
-                var station = _station.GetOwningStation(grid.Value);
-                if(station != null)
-                {
-                    _station.RemoveGridFromStation(station.Value, grid.Value);
-                }
-                else
-                {
-                    var ownername = _station.GetOwningStationPersonal(grid.Value);
-                    if(ownername != null)
-                    {
-                        _station.RemoveGridFromPerson(grid.Value);
-                    }
-                }
-
+                _station.RemoveGridFromStation(station.Value, grid.Value);
             }
+            else
+            {
+                var ownername = _station.GetOwningStationPersonal(grid.Value);
+                if(ownername != null)
+                {
+                    _station.RemoveGridFromPerson(grid.Value);
+                }
+            }
+
         }
         UpdateUserInterface(uid, component, args);
     }
@@ -616,6 +625,11 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
         GridConfigBoundUserInterfaceState newState;
         bool allowed = true;
         string? errMsg = null;
+        bool controlled = false;
+        if (grid != null)
+        {
+            controlled = IsGridControlled(grid.Value);
+        }
         int gridTileCount = 0;
         if (TryComp<MapGridComponent>(grid, out var targetGridComp))
             gridTileCount = _mapSystem.GetAllTiles(grid.Value, targetGridComp).Count();
@@ -647,7 +661,7 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
             }
         }
         newState = new GridConfigBoundUserInterfaceState(
-            idPresent, isOwner, isAuth, component.PersonalMode, possibleStations,
+            idPresent, isOwner, isAuth, component.PersonalMode, controlled, possibleStations,
             targetName, owningPerson, gridName, privilegedIdName, targetStation,
             gridTileCount, currentTileCount, tileLimit, errMsg);
 
@@ -793,6 +807,53 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
 
         var privilegedId = component.PrivilegedIdSlot.Item;
         return privilegedId != null && _accessReader.IsAllowed(privilegedId.Value, readerComponent.Value);
+    }
+
+    private void UpdateUserInterface(EntityUid uid, GridControlConsoleComponent component, EntityEventArgs args)
+    {
+        if (!component.Initialized)
+            return;
+      
+        GridControlConsoleBoundUserInterfaceState newState;
+
+        newState = new GridControlConsoleBoundUserInterfaceState(component.Active);
+
+        _userInterface.SetUiState(uid, GridControlConsoleUiKey.Key, newState);
+    }
+
+    private void OnGridControlOn(EntityUid uid, GridControlConsoleComponent component, GridControlOn args)
+    {
+        if (!component.Initialized)
+            return;
+        if (!_accessReader.IsAllowed(args.Actor, uid)) return;
+        component.Active = true;
+        UpdateUserInterface(uid, component, args);
+    }
+    private void OnGridControlOff(EntityUid uid, GridControlConsoleComponent component, GridControlOff args)
+    {
+        if (!component.Initialized)
+            return;
+        if (!_accessReader.IsAllowed(args.Actor, uid)) return;
+        component.Active = false;
+        UpdateUserInterface(uid, component, args);
+    }
+
+    public bool IsGridControlled(EntityUid entityUid)
+    {
+        var query = _entManager.AllEntityQueryEnumerator<GridControlConsoleComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Active)
+            {
+                var targetGrid = _transform.GetGrid(uid);
+                if(targetGrid == entityUid)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 }

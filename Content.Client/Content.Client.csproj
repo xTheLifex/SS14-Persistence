@@ -32,6 +32,9 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Compile Update="GridControl\UI\GridControlConsoleWindow.xaml.cs">
+      <DependentUpon>GridControlConsoleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Update="CrewAssignments\UI\JobNetMenu.xaml.cs">
       <DependentUpon>JobNetMenu.xaml</DependentUpon>
     </Compile>

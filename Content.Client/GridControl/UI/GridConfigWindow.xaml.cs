@@ -151,25 +151,32 @@ public sealed partial class GridConfigWindow : DefaultWindow
             MissingPrivilegesLabel.Text = "";
         }
 
+        if(state.IsControlled || !gridFound || !gridOwned)
+        {
+            GridDisconnect.Disabled = true;
+        }
+        else
+        {
+            GridDisconnect.Disabled = false;
+        }
+
         if (gridFound && state.IsAuth && state.ErrorMessage == null)
         {
             if (gridOwned)
             {
                 GridConnect.Disabled = true;
-                GridDisconnect.Disabled = false;
+
                 GridNameBtn.Disabled = false;
             }
             else
             {
                 GridConnect.Disabled = false;
-                GridDisconnect.Disabled = true;
                 GridNameBtn.Disabled = true;
             }
         }
         else
         {
             GridConnect.Disabled = true;
-            GridDisconnect.Disabled = true;
             GridNameBtn.Disabled = true;
         }
     }
