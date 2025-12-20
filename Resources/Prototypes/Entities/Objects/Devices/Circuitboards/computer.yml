@@ -100,9 +100,22 @@
 
 - type: entity
   parent: BaseComputerCircuitboard
+  id: GridControlComputerCircuitboard
+  name: grid control computer board
+  description: A computer printed circuit board for a grid control computer.
+  components:
+    - type: Sprite
+      state: cpu_supply
+    - type: ComputerBoard
+      prototype: ComputerStationModification
+    - type: StaticPrice
+      price: 750
+
+- type: entity
+  parent: BaseComputerCircuitboard
   id: StationModComputerCircuitboard
-  name: station modification computer board
-  description: A computer printed circuit board for a station modification computer.
+  name: faction modification computer board
+  description: A computer printed circuit board for a faction modification computer.
   components:
     - type: Sprite
       state: cpu_supply

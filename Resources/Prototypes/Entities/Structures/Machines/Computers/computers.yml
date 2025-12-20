@@ -565,7 +565,7 @@
   parent: BaseComputerAiAccess
   id: ComputerId
   name: ID card computer
-  description: Terminal for programming Nanotrasen employee ID cards to access parts of the station.
+  description: Terminal for programming employee ID cards to access parts of the station.
   components:
   - type: IdCardConsole
     privilegedIdSlot:
@@ -623,6 +623,8 @@
       board: !type:Container
       IdCardConsole-privilegedId: !type:ContainerSlot
       IdCardConsole-targetId: !type:ContainerSlot
+  - type: AccessReader
+    access: []
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -854,11 +856,46 @@
     energy: 4.0
     color: "#e6e227"
 
-  
+- type: entity
+  id: ComputerGridControl
+  parent: BaseComputerAiAccess
+  name: grid control computer
+  description: Used to prevent a grid from being unclaimed.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: comm_syndie
+    - map: ["computerLayerKeys"]
+      state: syndie_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: Computer
+    board: GridControlComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 4.0
+    color: "#f71713"
+  - type: AccessReader
+    access: []
+  - type: GridControlConsole
+  - type: ActivatableUI
+    key: enum.GridControlConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.GridControlConsoleUiKey.Key:
+        type: GridControlConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+
 - type: entity
   id: ComputerStationModification
   parent: BaseComputerAiAccess
-  name: station modification computer
+  name: faction modification computer
   description: Used to structure assignments and access.
   components:
   - type: Sprite
