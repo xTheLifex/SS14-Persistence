@@ -1590,3 +1590,31 @@
 ## Y ##
 ## Z ##
 # ALPHABETICAL
+
+
+- type: Tag
+  id: Silver 
+
+- type: Tag
+  id: Gold
+
+- type: Tag
+  id: Steel 
+
+- type: Tag
+  id: Wood 
+
+- type: Tag
+  id: Brass 
+
+- type: Tag
+  id: Plasma
+
+- type: Tag
+  id: Uranium 
+
+- type: Tag
+  id: Coal 
+
+- type: Tag
+  id: Plasteel 

@@ -254,9 +254,9 @@
     heldPrefix: wood
   - type: Tag
     tags:
+    - RawMaterial
     - Wood
     - Wooden
-    - RawMaterial
     - ConstructionMaterial
   - type: Extractable
     grindableSolutionName: wood
