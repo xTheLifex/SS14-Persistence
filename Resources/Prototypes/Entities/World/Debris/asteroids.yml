@@ -1499,7 +1499,8 @@
           WaterVapor: 215
       variableMixture:
         Frezon:
-
+          moles: 10
+          prob: 0.2
         Plasma:
           moles: 110
           prob: 0.7
