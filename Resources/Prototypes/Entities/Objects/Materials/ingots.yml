@@ -39,6 +39,8 @@
       Gold: 100
   - type: Tag
     tags:
+    - Ingot
+    - ConstructionMaterial
     - Gold
   - type: Stack
     stackType: Gold
@@ -87,6 +89,8 @@
       Silver: 100
   - type: Tag
     tags:
+    - Ingot
+    - ConstructionMaterial
     - Silver
   - type: Stack
     stackType: Silver

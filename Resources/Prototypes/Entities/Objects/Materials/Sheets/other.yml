@@ -86,6 +86,8 @@
       Plasma: 100
   - type: Tag
     tags:
+    - Sheet
+    - ConstructionMaterial
     - Plasma
   - type: Stack
     stackType: Plasma
@@ -212,6 +214,8 @@
       Uranium: 100
   - type: Tag
     tags:
+    - Sheet
+    - ConstructionMaterial
     - Uranium
   - type: Stack
     stackType: Uranium

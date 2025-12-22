@@ -47,6 +47,9 @@
       Steel: 100
   - type: Tag
     tags:
+    - Sheet
+    - Metal
+    - ConstructionMaterial
     - Steel      
   - type: Stack
     stackType: Steel
@@ -111,6 +114,9 @@
       Brass: 100
   - type: Tag
     tags:
+    - Sheet
+    - Metal
+    - ConstructionMaterial
     - Brass
   - type: Stack
     stackType: Brass
@@ -177,6 +183,9 @@
       Plasteel: 100
   - type: Tag
     tags:
+    - Sheet
+    - Metal
+    - ConstructionMaterial
     - Plasteel
   - type: Stack
     stackType: Plasteel
