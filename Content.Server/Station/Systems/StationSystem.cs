@@ -443,6 +443,7 @@ public sealed partial class StationSystem : SharedStationSystem
 
         var stationMember = EnsureComp<StationMemberComponent>(mapGrid);
         stationMember.Station = station;
+        stationMember.StationUID = stationData.UID;
         stationData.Grids.Add(mapGrid);
         Dirty(station, stationData);
         Dirty(mapGrid, stationMember);
