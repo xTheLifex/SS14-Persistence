@@ -3,7 +3,7 @@
   id: BaseBiome
   noiseRanges:
     BiomeBaseMask: # | 0.1,1 = Abundant | 0.35,1 = Common | 0.5,1 = Rare | 0.9,1 = Desolate |
-      - 0.35,1
+      - 0.5,1
   debrisEntityTable: 'BaseSpaceMobTable'
 
 # Minimal mob table for all space biomes (except void) - Based on SalvageMagnetMobTable
@@ -68,7 +68,6 @@
       - id: MobBearSpace
       - id: MobKangarooSpace
       - id: MobSpiderSpace
-      - id: MobSnakeSpace
         weight: 2
     - !type:GroupSelector # scary monsters
       weight: 20
@@ -84,10 +83,10 @@
       children:
       - !type:AllSelector
         children:
-        - id: MobSnakeSpace
-          amount: 3
         - id: MobSpiderSpace
         - id: MobKangarooSpace
+          amount: 3
+
 
 - type: entityTable
   id: DebugImpossibleSpaceMobTable

@@ -1,4 +1,4 @@
-﻿- type: worldgenConfig
+- type: worldgenConfig
   id: Default
   components:
     - type: WorldController
@@ -13,6 +13,5 @@
         - GeoactiveBiome
         - WeirdmetalBiome
         - BrassmetalBiome
-        - RainbowBiome
         - VoidBiome
         - BaseBiome

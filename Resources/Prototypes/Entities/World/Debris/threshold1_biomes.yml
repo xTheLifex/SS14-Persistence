@@ -155,7 +155,7 @@
   priority: 1
   noiseRanges:
     BiomeBase:
-      - 4,5
+      - 4,6
   debrisEntityTable: 'BaseSpaceMobTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
@@ -182,7 +182,7 @@
   priority: 1
   noiseRanges:
     BiomeBase:
-      - 5,6
+      - 6,7
   debrisEntityTable: 'CarpMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
@@ -208,7 +208,7 @@
   priority: 1
   noiseRanges:
     BiomeBase:
-      - 6,7
+      - 7,8
   debrisEntityTable: 'CarpMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
@@ -242,7 +242,7 @@
   priority: 1
   noiseRanges:
     BiomeBase:
-      - 7,8
+      - 8,9
   debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
@@ -268,7 +268,7 @@
   priority: 1
   noiseRanges:
     BiomeBase:
-      - 8,9
+      - 9,10
   debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
@@ -289,26 +289,3 @@
           prob: 0.1
         - id: BrassDebrisHuge
           prob: 0.03
-
-- type: spaceBiome
-  parent: BaseBiome
-  id: RainbowBiome
-  priority: 1
-  noiseRanges:
-    BiomeBase:
-      - 9,10
-  debrisEntityTable: 'BaseSpaceMobTable'
-  chunkComponents:
-    - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
-    - type: SimpleDebrisSelector
-      debrisTable:
-        - id: BrassDebrisSmall
-          prob: .5
-        - id: ChromiteDebrisSmall
-        - id: IceDebrisSmall
-        - id: IronrockDebrisSmall
-        - id: BasaltDebrisSmall
-        - id: AndesiteDebrisSmall
-        - id: AsteroidDebrisSmall
-        - id: ConglomerateDebrisSmall

@@ -1,4 +1,4 @@
-﻿- type: noiseChannel
+- type: noiseChannel
   id: Density
   noiseType: Perlin
   fractalLacunarityByPi: 0.666666666
@@ -89,7 +89,7 @@
 - type: noiseChannel
   id: BiomeBase
   noiseType: Cellular
-  frequency: 0.04
+  frequency: 0.1
   remapTo0Through1: true
   inputMultiplier: 1
   outputMultiplier: 10
@@ -98,7 +98,7 @@
 - type: noiseChannel
   id: BiomeBaseMask
   noiseType: Cellular
-  frequency: 0.04
+  frequency: 0.1
   remapTo0Through1: true
   inputMultiplier: 1
   fractalType: None
