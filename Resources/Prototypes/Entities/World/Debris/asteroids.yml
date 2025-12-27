@@ -771,7 +771,7 @@
             prob: 0.2
             orGroup: rock
           - id: WallRockBasaltGibtonite
-            prob: 0.05
+            prob: 0.1
             orGroup: rock
     - type: IFF
       flags: HideLabel
@@ -831,7 +831,7 @@
             prob: 0.1
             orGroup: rock
           - id: WallRockBasaltGibtonite
-            prob: 0.02
+            prob: 0.05
             orGroup: rock
     - type: IFF
       flags: HideLabel
@@ -891,7 +891,7 @@
             prob: 0.3
             orGroup: rock
           - id: WallRockBasaltGibtonite
-            prob: 0.1
+            prob: 0.15
             orGroup: rock
     - type: IFF
       flags: HideLabel
