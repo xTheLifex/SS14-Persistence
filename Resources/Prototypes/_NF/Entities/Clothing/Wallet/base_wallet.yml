@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseStorageItem, Clothing, RecyclableItemClothBasic]
+  parent: [BaseStorageItem, Clothing] # Persistence: Removed RecyclableItemClothBasic
   id: NFBaseWallet
   abstract: true
   name: wallet
