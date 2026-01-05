@@ -32,8 +32,7 @@
       - Cash
       - Paper
       - NFCoin
-      - NFShipyardVoucher
-      - Card # single cards
+#      - Card # Single playing card # Persistence: playing cards are not implemented
     blacklist:
       tags:
       - Book
@@ -49,8 +48,8 @@
         whitelist:
           components:
           - Paper
-          - NFShipyardVoucher
-          - Card
+          - Invoice # Persistence: invoices inside wallets cause wallets to show paper inside
+#          - Card # Persistence: playing cards are not implemented
       closed-cash:
         whitelist:
           components:
