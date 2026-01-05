@@ -33,6 +33,7 @@
       - Paper
       - NFCoin
 #      - Card # Single playing card # Persistence: playing cards are not implemented
+      - Invoice # Persistence: digital invoices in wallets
     blacklist:
       tags:
       - Book
