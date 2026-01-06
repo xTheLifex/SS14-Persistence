@@ -169,7 +169,7 @@ public sealed class CritMobActionsSystem : EntitySystem
         }
         var xform = Transform(uid);
         var mapPos = _transform.GetWorldPosition(xform);
-        _radio.SendRadioMessage(uid, $"{Name(uid)} has died at {mapPos.ToString()} and is broadcasting an SOS.", "Common", uid, true, false);
+        _radio.SendRadioMessage(uid, $"{Name(uid)} has died at ({mapPos.X:F1}, {mapPos.Y:F1}) and is broadcasting an SOS.", "Common", uid, true, false);
         var respawnTime = TimeSpan.FromSeconds(_configurationManager.GetCVar(CCVars.AcceptDeathTime));
         component.SOSCooldown = _timing.CurTime + respawnTime;
         UpdateUserInterface(uid, uid, component);
