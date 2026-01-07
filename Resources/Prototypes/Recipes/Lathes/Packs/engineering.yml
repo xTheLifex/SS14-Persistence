@@ -96,6 +96,7 @@
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
+  - PortableGeneratorOldmanMachineCircuitboard
   - EmitterCircuitboard
   - TelecomServerCircuitboard
   - SMESAdvancedMachineCircuitboard
