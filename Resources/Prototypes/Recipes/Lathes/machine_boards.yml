@@ -114,25 +114,25 @@
   id: EmitterCircuitboard
   result: EmitterCircuitboard
   unlockUses: 4
-  
+
 # Atmos
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
   id: ThermomachineFreezerMachineCircuitBoard
   result: ThermomachineFreezerMachineCircuitBoard
   unlockUses: 4
-  
+
 - type: latheRecipe
   parent: [ BaseSilverCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
   id: HellfireFreezerMachineCircuitBoard
   result: HellfireFreezerMachineCircuitBoard
   unlockUses: 2
-  
+
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
   id: SpaceHeaterMachineCircuitBoard
   result: SpaceHeaterMachineCircuitBoard
-  
+
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
   id: PortableScrubberMachineCircuitBoard
@@ -149,7 +149,7 @@
   id: GasRecyclerMachineCircuitboard
   result: GasRecyclerMachineCircuitboard
   unlockUses: 4
-  
+
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
   id: MCTNMachineCircuitboard
@@ -290,7 +290,7 @@
   parent: [BaseCircuitboardRecipe]
   id: SmartFridgeCircuitboard
   result: SmartFridgeCircuitboard
-  
+
 # Bar
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
@@ -451,6 +451,11 @@
   parent: [ BaseCircuitboardRecipe, BaseSupplyMachineRecipeCategory ]
   id: RecyclerMachineCircuitboard
   result: RecyclerMachineCircuitboard
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseSupplyMachineRecipeCategory ]
+  id: ShredderMachineCircuitboard
+  result: ShredderMachineCircuitboard
 
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseSupplyMachineRecipeCategory ]
